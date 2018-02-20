@@ -40,33 +40,33 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     istio-ingress          10.31.244.185   169.47.103.138   80:31920/TCP,443:32165/TCP    1h
     ```
 
-4. Export the external IP address from the previous command.
+4. Store the external IP address from the previous command as a session variable.
    
     ```sh
     export INGRESS_IP=[external_IP]
     ```
 
-5. Use the external IP address to see the guestbook UI in your web browser.
+5. Use the external IP address to access the guestbook UI in your web browser.
    ```
-   http://[external_ip]
+   http://[external_IP]
    ```
    
 6. Access the Hello World service and see the response JSON in your web browser.
    ```
-   http://[external_ip]/hello/world
+   http://[external_IP]/hello/world
    ```
 
-6. Curl the guestbook:
-    ```
-    curl http://$INGRESS_IP/echo/universe
-    ```
+7. Curl the guestbook service.
+   ```
+   curl http://$INGRESS_IP/echo/universe
+   ```
 
-6. Curl the Hello World service:
-    ```
-    curl http://$INGRESS_IP/hello/world
-    ```
+6. Curl the helloworld service:
+   ```
+   curl http://$INGRESS_IP/hello/world
+   ```
 
-7. Then curl the echo endpoint multiple times and notice how it round robins between v1 and v2 of the Hello World service:
+7. Curl the guestbook service multiple times. Every request that you send to your guestbook service is load balanced between the two hello world service instances (`v1` and `v2`) on a round robin basis. You can see the different hello world service versions in the `hostname` and `greeting` field of your CLI output. 
 
     ```sh
     curl http://$INGRESS_IP/echo/universe
