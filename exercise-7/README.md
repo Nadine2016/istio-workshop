@@ -40,20 +40,20 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     istio-ingress          10.31.244.185   169.47.103.138   80:31920/TCP,443:32165/TCP    1h
     ```
 
-3. Export the external IP address from the previous command.
+4. Export the external IP address from the previous command.
    
     ```sh
     export INGRESS_IP=[external_IP]
     ```
 
-4. Use the external IP address to see the guestbook UI in your web browser.
+5. Use the external IP address to see the guestbook UI in your web browser.
    ```
    http://[external_ip]
    ```
    
-5. Access the Hello World service and see the response JSON in your web browser.
+6. Access the Hello World service and see the response JSON in your web browser.
    ```
-   http://INGRESS_IP/hello/world
+   http://[external_ip]/hello/world
    ```
 
 6. Curl the guestbook:
