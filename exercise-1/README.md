@@ -2,34 +2,45 @@
 
 Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisioned for you. Here are the steps to access your cluster:
 
-### Install IBM Cloud Container Service command line utilities
+### Installing the IBM Cloud Container Service command line utilities
 
 1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
 
-2. Log in to the IBM Cloud CLI with IBM API key:   
-   `bx login -u ibmcloudxx@us.ibm.com --apikey xxxx`      
+2. Log in to the IBM Cloud CLI with your user name and api key:   
+   ```
+   bx login -u ibmcloudxx@us.ibm.com --apikey xxxx
+   ```
 
-3. Install the IBM Cloud Container Service plug-in with `bx plugin install container-service -r Bluemix`.
+3. Install the IBM Cloud Container Service plug-in.
+   ```
+   bx plugin install container-service -r Bluemix
+   ```
 
-4. To verify that the plug-in is installed properly, run `bx plugin list`. The Container Service plug-in is displayed in the results as `container-service`.
+4. Verify that the plug-in is installed properly
+   ```
+   bx plugin list
+   ```
+   The container service plug-in is displayed in the results as `container-service`.
 
-5. Initialize the Container Service plug-in and point the endpoint to us-east.   
-   `bx cs region-set us-east`
+5. Initialize the container service plug-in and point the API endpoint to the us-east region.   
+   ```
+   bx cs region-set us-east
+   ```
 
 6. Install the Kubernetes CLI. Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl) to install the CLI and follow the steps.
 
 
-### Access your cluster
+### Accessing your cluster
 
-1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
+1. Set the context for your cluster in your CLI. Every time you log in to the IBM Cloud Container Service CLI to work with your cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
 
-    a. List the available clusters. You should see the cluster `guestbook`.
+    a. List available clusters. You should see the cluster `guestbook`.
     
     ```bash
     bx cs clusters
     ```
     
-    b. Download the configuration file and certificates for your `guestbook` cluster using the `cluster-config` command.
+    b. Download the configuration file and certificates for your `guestbook` cluster.
     
     ```bash
     bx cs cluster-config guestbook
@@ -45,7 +56,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     
 3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
 
-4. View details of your cluster.
+4. View the details of your cluster.
     ```
     bx cs cluster-get guestbook
     ```
@@ -53,18 +64,18 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 5. Verify the worker nodes in the cluster.   
     ```
     bx cs workers guestbook
-    bx cs worker-get [worker name]
+    bx cs worker-get [worker_id]
     ```
-### Clone the lab repo
+### Cloning the lab Github repo
 
-From your command line, run:
+1. Clone the repo.
+   ```    
+   git clone https://github.com/szihai/istio-workshop.git 
+   ```
    
-```    
-git clone https://github.com/szihai/istio-workshop
-
-cd istio-workshop
-```
-
-This is the working directory for the lab.
+2. Navigate in to the working directory for the lab. 
+   ```
+   cd istio-workshop
+   ```
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
