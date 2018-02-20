@@ -8,7 +8,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 2. Log in to the IBM Cloud CLI with your user name and api key:   
    ```
-   bx login -u ibmcloudxx@us.ibm.com --apikey xxxx
+   bx login -u ibmcloudxx@us.ibm.com -apikey xxxx
    ```
 
 3. Install the IBM Cloud Container Service plug-in.
