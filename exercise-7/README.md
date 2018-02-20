@@ -4,7 +4,7 @@ The components deployed on the service mesh by default are not exposed outside t
 
 A Kubernetes Ingress rule can be created that routes external requests through the Istio Ingress controller to the backing services.
 
-#### Configure Guestbook Ingress routes with the Istio Ingress controller
+#### Configuring Guestbook Ingress routes with the Istio Ingress controller
 
 1. Configure the guestbook UI default route with the Istio Ingress controller.
 
@@ -12,7 +12,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     kubectl apply -f guestbook/guestbook-ingress.yaml
     ```
 
-    In this file, notice that the Ingress class is specified as `kubernetes.io/ingress.class: istio`, which routes the request to Istio. Also notice that the request is routed to different services, either `helloworld-service` or `guestbook-ui`, depending on the request. You can see how this works by having Kubernetes describe the Ingress resource:
+2. Review the YAML file for your Ingress controller. In this file, the Ingress class is specified as `kubernetes.io/ingress.class: istio`, which routes every request to the Istio Ingress controller. When you look at the Ingress rules that are defined in this YAML, you see that requests are routed to either the `helloworld-service` or `guestbook-ui` service, depending on the URL path that is used in the request. 
 
     ```sh
     kubectl describe ingress
@@ -31,7 +31,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     Events:  <none>
     ```
 
-2. Get the external IP of the Istio Ingress controller.
+3. Get the `External-IP` of the Istio Ingress controller.
 
     ```sh
     kubectl get service istio-ingress -n istio-system
@@ -46,10 +46,17 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     export INGRESS_IP=[external_IP]
     ```
 
-4. Use the INGRESS IP to see the guestbook UI in a browser: `http://INGRESS_IP`. You can also access the Hello World service and see the JSON in the browser: `http://INGRESS_IP/hello/world`.
+4. Use the external IP address to see the guestbook UI in your web browser.
+   ```
+   http://[external_ip]
+   ```
+   
+5. Access the Hello World service and see the response JSON in your web browser.
+   ```
+   http://INGRESS_IP/hello/world
+   ```
 
-
-5. Curl the guestbook:
+6. Curl the guestbook:
     ```
     curl http://$INGRESS_IP/echo/universe
     ```
