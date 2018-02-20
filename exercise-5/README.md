@@ -43,7 +43,7 @@
    kubectl apply -f install/kubernetes/addons/servicegraph.yaml
    ```
 
-5. Watch the deployment of Istio and related add-ons by using the watch flag (`w`) when listing Kubernetes resources. Istio and all related add-ons are deployed as services and pods in to the Kubernetes namespace `istio-system`. In two separate terminal windows, run: 
+5. Watch the deployment of Istio and related add-ons by using the watch flag (`-w`) when listing Kubernetes resources. Istio and all related add-ons are deployed as services and pods in to the Kubernetes namespace `istio-system`. Run these commands in two separate terminal windows. 
    ```sh
    kubectl get pods -w --all-namespaces
    ```
