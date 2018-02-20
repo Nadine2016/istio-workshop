@@ -7,8 +7,8 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
 
 2. Log in to the IBM Cloud CLI with your user name and api key:   
-   ```
-   bx login -u ibmcloudxx@us.ibm.com -apikey xxxx
+   ```
+   bx login -u ibmcloudxx@us.ibm.com --apikey xxx
    ```
 
 3. Install the IBM Cloud Container Service plug-in.
