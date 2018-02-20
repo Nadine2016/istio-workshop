@@ -57,25 +57,22 @@ The guestbook example requires MySQL to store guestbook entries and Redis to sto
     kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment-v2.yaml)
     ```
 
-2. Verify that these microservices are available before continuing. **Do not procede until they are up and running.** 
-
+2. Verify that these microservices are available before continuing. 
     ```
     kubectl get -w deployment
     ```
     
-3. Deploy the guestbook microservice.
+3. Wait for the deployment of the microservices to finish. The deployment is finished when the `DESIRED` and the `AVAILABLE` colums match.         
+4. Deploy the guestbook microservice.
 
     ```sh
     kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-deployment.yaml) -f guestbook/guestbook-service.yaml
     ```
+    
+5. Wait for the deployment of the guestbook microservice to finish. The deployment is finished when the `DESIRED` and the `AVAILABLE` colums match.
 
-4. Verify that guestbook is available before continuing. **Do not procede until the microservice is up and running.** 
 
-    ```
-    kubectl get -w deployment
-    ```
-
-5. Deploy the guestbook UI:
+6. Deploy the guestbook UI.
 
     ```sh
     kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-ui-deployment.yaml --debug) -f guestbook/guestbook-ui-service.yaml
