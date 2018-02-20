@@ -1,59 +1,54 @@
 # Exercise 5 - Installing Istio
 
-### Download Istio
+### Downloading the Istio client
 
-1. Either download Istio directly from https://github.com/istio/istio/releases or get the latest version using curl:
-
+1. You can download the Istio client from https://github.com/istio/istio/releases directly or get the latest version by using the curl command. 
    ```
    curl -L https://git.io/getLatestIstio | sh -
    ```
 
 2. Extract the installation files.
    
-3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:   
-   
-   #### Remember to change the [version] to the current value
-
+3. Add the `istioctl` client to your PATH environment variable. 
+ 
+   **Example for MacOS or Linux: **
    ```
    export PATH=$PWD/istio-[version]/bin:$PATH
    ```
+   Replace `[version]` with the Istio version number that you downloaded. 
 
-### Install Istio on the Kubernetes cluster
+### Installing Istio on your Kubernetes cluster
 
-1. Change the directory to the Istio file location.
+1. Navigate in to the Istio installation directory.
 
    ```
    cd [path_to_istio-version]
    ```
-There is a small bug for version 0.5.1 that has to be fixed.
+   
+2. Add the `istio-system` namespace to the Prometheus add-on configuration file. **Note:** This is a bug in the Istio version 0.5.1 that must be fixed.
    ```sh
    echo "  namespace: istio-system" >> install/kubernetes/addons/prometheus.yaml 
    ```
    
-2. Install Istio on the Kubernetes cluster.
-
+3. Install Istio on your Kubernetes cluster.
    ```
    kubectl apply -f install/kubernetes/istio-auth.yaml
    ```
 
-### Install Add-ons for Grafana, Prometheus, and Zipkin
+4. Install the add-ons for Grafana, Prometheus, and Zipkin
+   ```sh
+   kubectl apply -f install/kubernetes/addons/zipkin.yaml
+   kubectl apply -f install/kubernetes/addons/grafana.yaml
+   kubectl apply -f install/kubernetes/addons/prometheus.yaml
+   kubectl apply -f install/kubernetes/addons/servicegraph.yaml
+   ```
 
-```sh
-kubectl apply -f install/kubernetes/addons/zipkin.yaml
-kubectl apply -f install/kubernetes/addons/grafana.yaml
-kubectl apply -f install/kubernetes/addons/prometheus.yaml
-kubectl apply -f install/kubernetes/addons/servicegraph.yaml
-```
-
-### View the Istio deployments
-
-Istio is deployed in a separate Kubernetes namespace `istio-system`  You can watch the state of Istio and other services and pods using the watch flag (`-w`) when listing Kubernetes resources. For example, in two separate terminal windows run:
-
-```sh
-kubectl get pods -w --all-namespaces
-```
-```sh
-kubectl get services -w --all-namespaces
-```
+5. Watch the deployment of Istio and related add-ons by using the watch flag (`w`) when listing Kubernetes resources. Istio and all related add-ons are deployed as services and pods in to the Kubernetes namespace `istio-system`. In two separate terminal windows, run: 
+   ```sh
+   kubectl get pods -w --all-namespaces
+   ```
+   ```sh
+   kubectl get services -w --all-namespaces
+   ```
 
 #### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
